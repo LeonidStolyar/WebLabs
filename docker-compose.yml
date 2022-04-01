@@ -2,13 +2,16 @@ services:
   web:
     image: nginx:latest
     ports:
-      - "8080:80"
+    - "8080:80"
     volumes:
       - ./code:/code
       - ./hosts:/etc/nginx/conf.d
     links:
       - php
   php:
-    image: php:7-fpm
+    image: php:8-fpm
     volumes:
       - ./code:/code
+      - ./vendor:/vendor
+    env_file:
+      - .env
